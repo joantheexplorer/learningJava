@@ -18,16 +18,22 @@ public class AnnualBonus {
             // gets the validated user input.
             checkInputName();
             int yearService = checkInputYear();
-            float percentBonus = checkInputRate();
+            String perfRating = checkInputRate();
             float annualSalary = checkInputSalary();
 
             // computes for bonus and total salary
-            float employeeBonus = calculateBonus(annualSalary, yearService, percentBonus);
+            float employeeBonus = calculateBonus(annualSalary, yearService, perfRating);
+            float percentBonus = convertPercent(yearService, perfRating)
 
             // display computed results
             System.out.println();
             System.out.println("===== Calculation =====");
-            System.out.printf("The bonus is: ₱%,.2f%n (%d%% of %₱%,.2f%)", employeeBonus, (percentBonus*100), annualSalary);
+            if (yearService < 5) {
+                System.out.printf("The bonus is: ₱%,.2f (Fixed Bonus)%n", employeeBonus);
+            } 
+            else {
+                System.out.printf("The bonus is: ₱%,.2f (%.0f%% of ₱%,.2f)%n", employeeBonus, percentBonus, annualSalary);
+            }
             System.out.println();
 
             // asks the user if they want to repeat the process
@@ -94,11 +100,10 @@ public class AnnualBonus {
         }
     }
 
-    // validation for performance rating (0-100)
-    static float checkInputRate()
+    // validation for performance rating (excellent/good/other)
+    static String checkInputRate()
     {
         String inputRate;
-        float convertedRate;
 
         while (true)
         {
@@ -107,18 +112,10 @@ public class AnnualBonus {
 
             if (!inputRate.isEmpty()) // rate must not be empty
             {
-                if (inputRate.equalsIgnoreCase("excellent")) {
-                    convertedRate = 0.20f;
-                    return convertedRate;
+                if (inputRate.equalsIgnoreCase("excellent") || inputRate.equalsIgnoreCase("good") || inputRate.equalsIgnoreCase("other")) {
+                    return inputRate;
                 }
-                else if (inputRate.equalsIgnoreCase("good")) {
-                    convertedRate = 0.15f;
-                    return convertedRate;
-                } 
-                else {
-                    convertedRate = 0.10f;
-                    return convertedRate;
-                }
+
             }
             else
             {
@@ -193,54 +190,75 @@ public class AnnualBonus {
     }
 
     // Method for calculating the bonus based on year of service and performance rating
-    static float calculateBonus(float annualSalary, int yearService, int percentBonus)
+    static float calculateBonus(float annualSalary, int yearService, String perfRating)
     {
-        float salaryBonus;
         final float fixedBonus = 5000;
 
         // Employees with 10 or more years of service
         if (yearService >= 10)
         {
-            if (percentBonus == 0.20)
-            {
-                salaryBonus = annualSalary * percentBonus;
-                return salaryBonus;
+            if (perfRating.equalsIgnoreCase("excellent")) {
+                return annualSalary * (0.20f);
             }
-            else if (percentBonus == 0.15)
+            else if (perfRating.equalsIgnoreCase("good")) 
             {
-                salaryBonus = annualSalary * percentBonus;
-                return salaryBonus;
+                return annualSalary * (0.15f);
             }
-            else if (percentBonus == 0.10)
-            {
-                salaryBonus = annualSalary * percentBonus;
-                return salaryBonus;
+            else {
+                return annualSalary * (0.10f);
             }
         }
 
         // employees 5-9 years of service
         else if (yearService >= 5 && yearService <= 9)
         {
-            if (percentBonus == 0.20)
-            {
-                salaryBonus = annualSalary * percentBonus;
-                return salaryBonus;
+            if (perfRating.equalsIgnoreCase("excellent")) {
+                return annualSalary * (0.15f);
             }
-            else if (percentBonus == 0.15)
+            else if (perfRating.equalsIgnoreCase("good")) 
             {
-                salaryBonus = annualSalary * percentBonus;
-                return salaryBonus;
+                return annualSalary * (0.10f);
             }
-            else if (percentBonus == 0.10)
-            {
-                salaryBonus = annualSalary * percentBonus;
-                return salaryBonus;
+            else {
+                return annualSalary * (0.05f);
             }
         }
-        else {
-            salaryBonus = annualSalary + fixedBonus;
-            return salaryBonus;
+        // employees with less than 5 years of experience
+        else { 
+            return fixedBonus;
         }
-        return 0.0f;
+
+    }
+
+    // Compute to display the percent equivalent for the years of service
+    static float convertPercent(int yearService, String perfRating) {
+        float percent;
+        if (yearService >= 10) {
+            if (perfRating.equalsIgnoreCase("excellent")) {
+                percent = 20;
+                return percent;
+            }
+            else if (perfRating.equalsIgnoreCase("good")) {
+                percent = 15;
+                return percent;
+            }
+            else {
+                percent = 10;
+            }
+        } 
+        else if (yearService >= 5) {
+            if (perfRating.equalsIgnoreCase("excellent")) {
+                percent = 15;
+                return percent;
+            }
+            else if (perfRating.equalsIgnoreCase("good")) {
+                percent = 10;
+                return percent;
+            }
+            else {
+                percent = 5;
+                return percent;
+            }
+        }
     }
 }
