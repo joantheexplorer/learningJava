@@ -3,3 +3,5 @@
 
 1. University Pizzeria Order System
 2. Service Quote Generator
+3. Annual Bonus with rating (0-100)
+4. Annual Bonus with rating that uses string
