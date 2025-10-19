@@ -30,6 +30,7 @@ public class AnnualBonus {
             System.out.println("===== Calculation =====");
             System.out.printf("Bonus: ₱%,.2f%n", employeeBonus);
             System.out.printf("Total Salary: ₱%,.2f%n", totalSalary);
+            System.out.println();
 
             // asks the user if they want to repeat the process
             tryAgain = checkInputTry();
