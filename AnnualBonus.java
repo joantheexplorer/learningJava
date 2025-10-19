@@ -17,14 +17,14 @@ public class AnnualBonus {
 
             float employeeBonus = calculateBonus(annualSalary, yearService, performanceRate);
             float totalSalary = annualSalary + employeeBonus;
-            System.out.println("===== Calculation =====")
+            System.out.println("===== Calculation =====");
             System.out.println("Bonus: " + employeeBonus);
             System.out.println("Total Salary: " + totalSalary);
 
             tryAgain = checkInputTry();
             System.out.println();
 
-        } while (tryAgain.equalsIgnoreCase("Yes") || tryAgain.equalsIgnoreCase("Y"));
+        } while (tryAgain.equalsIgnoreCase("Yes") || tryAgain.equalsIgnoreCase("Y") || inputRepeat.equalsIgnoreCase("1"));
 
         System.out.println("Thank you for using this Java program.");
         userInput.close();
@@ -103,7 +103,7 @@ public class AnnualBonus {
 
             if (userInput.hasNextInt()) {
                 inputRate = userInput.nextInt();
-                if (inputRate >= 0 && inputRate >= 100) {
+                if (inputRate >= 0 && inputRate <= 100) {
                     userInput.nextLine();
                     return inputRate;
                 }
@@ -127,7 +127,8 @@ public class AnnualBonus {
             if (userInput.hasNextLine()) {
                 inputRepeat = userInput.nextLine().trim();
 
-                if (inputRepeat.equalsIgnoreCase("Yes") || inputRepeat.equalsIgnoreCase("No") || inputRepeat.equalsIgnoreCase("Y") || inputRepeat.equalsIgnoreCase("N")) {
+                if (inputRepeat.equalsIgnoreCase("Yes") || inputRepeat.equalsIgnoreCase("No") || inputRepeat.equalsIgnoreCase("Y") || inputRepeat.equalsIgnoreCase("N") 
+                || inputRepeat.equalsIgnoreCase("1") || inputRepeat.equalsIgnoreCase("0")) {
                     return inputRepeat;
                 }
                 else {
@@ -141,34 +142,35 @@ public class AnnualBonus {
         }
     }
     static float calculateBonus(float annualSalary, int yearService, int performanceRate) {
-        float salaryBonus
+        float salaryBonus;
         if (yearService >= 5) {
-            if (performaceRate >= 90) {
-                salaryBonus = annualSalary * 0.20;
+            if (performanceRate >= 90) {
+                salaryBonus = annualSalary * (0.20f);
                 return salaryBonus;
             }
-            else if (performanceRate >= 80 && performaceRate <= 89) {
-                salaryBonus = annualSalary * 0.15;
+            else if (performanceRate >= 80 && performanceRate <= 89) {
+                salaryBonus = annualSalary * (0.15f);
                 return salaryBonus;
             }
-            else if (performaceRate < 80) {
-                salaryBonus = annualSalary * 0.10;
+            else if (performanceRate < 80) {
+                salaryBonus = annualSalary * (0.10f);
                 return salaryBonus;
             }
         }
         else if (yearService < 5) {
-            if (performaceRate >= 90) {
-                salaryBonus = annualSalary * 0.10;
+            if (performanceRate >= 90) {
+                salaryBonus = annualSalary * (.10f);
                 return salaryBonus;
             }
-            else if (performanceRate >= 80 && performaceRate <= 89) {
-                salaryBonus = annualSalary * 0.5;
+            else if (performanceRate >= 80 && performanceRate <= 89) {
+                salaryBonus = annualSalary * (0.05f);
                 return salaryBonus;
             }
-            else if (performaceRate < 80) {
+            else if (performanceRate < 80) {
+                salaryBonus = annualSalary;
                 return salaryBonus;
             }
-
         }
+        return 0.0f;
     }
 }
