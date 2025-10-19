@@ -16,7 +16,7 @@ public class AnnualBonus {
             System.out.println();
 
             // gets the validated user input.
-            String employeeName = checkInputName();
+            checkInputName();
             float annualSalary = checkInputSalary();
             int yearService = checkInputYear();
             int performanceRate = checkInputRate();
