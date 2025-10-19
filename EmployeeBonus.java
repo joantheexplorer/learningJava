@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class AnnualBonus {
+public class EmployeeBonus {
     static Scanner userInput = new Scanner(System.in);
     public static void main(String[] args)
     {
@@ -11,8 +11,7 @@ public class AnnualBonus {
         {
             // displays the title and description of the program
             System.out.println("CALCULATOR for Employee Bonuses");
-            System.out.println(
-                "This is based on their years of service and performance rating");
+            System.out.println("This is based on their years of service and performance rating");
             System.out.println();
 
             // gets the validated user input.
@@ -22,17 +21,20 @@ public class AnnualBonus {
             float annualSalary = checkInputSalary();
 
             // computes for bonus and total salary
-            float employeeBonus = calculateBonus(annualSalary, yearService, perfRating);
-            float percentBonus = convertPercent(yearService, perfRating)
+            float finalBonus = calculateBonus(annualSalary, yearService, perfRating);
+            float percentBonus = convertPercent(yearService, perfRating);
 
             // display computed results
             System.out.println();
             System.out.println("===== Calculation =====");
-            if (yearService < 5) {
-                System.out.printf("The bonus is: ₱%,.2f (Fixed Bonus)%n", employeeBonus);
-            } 
-            else {
-                System.out.printf("The bonus is: ₱%,.2f (%.0f%% of ₱%,.2f)%n", employeeBonus, percentBonus, annualSalary);
+            if (yearService < 5)
+            {
+                System.out.printf("The bonus is: ₱%,.2f (Fixed Bonus)%n", finalBonus);
+            }
+            else
+            {
+                System.out.printf("The bonus is: ₱%,.2f (%.0f%% of ₱%,.2f)%n", finalBonus,
+                                  percentBonus, annualSalary);
             }
             System.out.println();
 
@@ -107,19 +109,17 @@ public class AnnualBonus {
 
         while (true)
         {
-            System.out.print("Enter performance rating (excellent/good/other):  ");
+            System.out.print("Enter performance rating (excellent/good/other): ");
             inputRate = userInput.nextLine().trim(); // remove any extra space
 
-            if (!inputRate.isEmpty()) // rate must not be empty
+            if (inputRate.equalsIgnoreCase("excellent") || inputRate.equalsIgnoreCase("good") ||
+                inputRate.equalsIgnoreCase("other"))
             {
-                if (inputRate.equalsIgnoreCase("excellent") || inputRate.equalsIgnoreCase("good") || inputRate.equalsIgnoreCase("other")) {
-                    return inputRate;
-                }
-
+                return inputRate;
             }
             else
             {
-                System.out.println("Please enter a valid string input. Try again");
+                System.out.println("Please enter one of the following: excellent, good, or other.");
             }
         }
     }
@@ -197,14 +197,16 @@ public class AnnualBonus {
         // Employees with 10 or more years of service
         if (yearService >= 10)
         {
-            if (perfRating.equalsIgnoreCase("excellent")) {
+            if (perfRating.equalsIgnoreCase("excellent"))
+            {
                 return annualSalary * (0.20f);
             }
-            else if (perfRating.equalsIgnoreCase("good")) 
+            else if (perfRating.equalsIgnoreCase("good"))
             {
                 return annualSalary * (0.15f);
             }
-            else {
+            else
+            {
                 return annualSalary * (0.10f);
             }
         }
@@ -212,53 +214,69 @@ public class AnnualBonus {
         // employees 5-9 years of service
         else if (yearService >= 5 && yearService <= 9)
         {
-            if (perfRating.equalsIgnoreCase("excellent")) {
+            if (perfRating.equalsIgnoreCase("excellent"))
+            {
                 return annualSalary * (0.15f);
             }
-            else if (perfRating.equalsIgnoreCase("good")) 
+            else if (perfRating.equalsIgnoreCase("good"))
             {
                 return annualSalary * (0.10f);
             }
-            else {
+            else
+            {
                 return annualSalary * (0.05f);
             }
         }
         // employees with less than 5 years of experience
-        else { 
+        else
+        {
             return fixedBonus;
         }
-
     }
 
     // Compute to display the percent equivalent for the years of service
-    static float convertPercent(int yearService, String perfRating) {
+    static float convertPercent(int yearService, String perfRating)
+    {
         float percent;
-        if (yearService >= 10) {
-            if (perfRating.equalsIgnoreCase("excellent")) {
+        if (yearService >= 10)
+        {
+            if (perfRating.equalsIgnoreCase("excellent"))
+            {
                 percent = 20;
                 return percent;
             }
-            else if (perfRating.equalsIgnoreCase("good")) {
+            else if (perfRating.equalsIgnoreCase("good"))
+            {
                 percent = 15;
                 return percent;
             }
-            else {
+            else
+            {
                 percent = 10;
+                return percent;
             }
-        } 
-        else if (yearService >= 5) {
-            if (perfRating.equalsIgnoreCase("excellent")) {
+        }
+        else if (yearService >= 5)
+        {
+            if (perfRating.equalsIgnoreCase("excellent"))
+            {
                 percent = 15;
                 return percent;
             }
-            else if (perfRating.equalsIgnoreCase("good")) {
+            else if (perfRating.equalsIgnoreCase("good"))
+            {
                 percent = 10;
                 return percent;
             }
-            else {
+            else
+            {
                 percent = 5;
                 return percent;
             }
+        }
+        else
+        {
+            return 0; // if less than 5 years
         }
     }
 }
