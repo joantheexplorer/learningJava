@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 public class AnnualBonus {
+    static Scanner userInput = new Scanner (System.in);
+
     public static void main (String[] args) {
-        Scanner userRepeat = new Scanner (System.in);
-        Scanner userInput = new Scanner (System.in);
+        String tryAgain;
 
         do {
             System.out.println("CALCULATOR for Annual Empolyee Bonus");
@@ -14,12 +15,14 @@ public class AnnualBonus {
             int yearService = checkInputYear();
             int performanceRate = checkInputRate();
 
-            String tryAgain = checkInputTry();
+
+            tryAgain = checkInputTry();
+            System.out.println();
 
         } while (tryAgain.equalsIgnoreCase("Yes") || tryAgain.equalsIgnoreCase("Y"));
 
-        System.out.println("Thank you for using this java program.");
-        tryAgain.close();
+        System.out.println("Thank you for using this Java program.");
+        userInput.close();
     }
 
     static String checkInputName () {
@@ -27,18 +30,15 @@ public class AnnualBonus {
 
         while (true) {
             System.out.print("Employee's name: ");
+            inputName = userInput.nextLine().trim();
 
-            if (userInput.hasNextLine()) {
-                inputName = userInput.nextLine();
-                break;
+            if (!inputName.isEmpty()) {
+                return inputName;
             }
             else {
                 System.out.println("Please enter a valid string input. Try again");
-                userInput.next();
             }
         }
-        
-        return inputName;
     }
     
     static float checkInputSalary () {
@@ -51,7 +51,8 @@ public class AnnualBonus {
                 inputSalary = userInput.nextFloat();
                 
                 if (inputSalary > 0) {
-                    break;
+                    userInput.nextLine();
+                    return inputSalary;
                 }
                 else {
                     System.out.println("Please enter a valid salary value. Try again.");
@@ -63,8 +64,6 @@ public class AnnualBonus {
                 userInput.next();
             }
         }
-
-        return inputSalary;
     }
     
     static int checkInputYear () {
@@ -76,8 +75,9 @@ public class AnnualBonus {
                 if (userInput.hasNextInt()) {
                     inputYear = userInput.nextInt();
 
-                    if (inputYear > 0 || inputYear < 100) {
-                        break;
+                    if (inputYear > 0 && inputYear < 100) {
+                        userInput.nextLine();
+                        return inputYear;
                     }
                     else {
                         System.out.println("Please enter a valid year of service. Try again.");
@@ -88,8 +88,6 @@ public class AnnualBonus {
                     userInput.next();
                 }
         }
-
-        return inputYear;
     }
 
     static int checkInputRate () {
@@ -100,8 +98,9 @@ public class AnnualBonus {
 
             if (userInput.hasNextInt()) {
                 inputRate = userInput.nextInt();
-                if (inputRate >= 0 && userRate => 100) {
-                    break;
+                if (inputRate >= 0 && inputRate >= 100) {
+                    userInput.nextLine();
+                    return inputRate;
                 }
                 else {
                     System.out.println("Please enter a valid performance rating. Try again.");
@@ -112,7 +111,6 @@ public class AnnualBonus {
                 userInput.next();
             }
         }
-        return inputRate;
     }
 
     static String checkInputTry () {
@@ -121,11 +119,11 @@ public class AnnualBonus {
         while (true) {
             System.out.print("Do you want to try again? (Yes or No): ");
 
-            if (userRepeat.hasNextLine()) {
-                inputRepeat = userRepeat.nextLine();
+            if (userInput.hasNextLine()) {
+                inputRepeat = userInput.nextLine().trim();
 
                 if (inputRepeat.equalsIgnoreCase("Yes") || inputRepeat.equalsIgnoreCase("No") || inputRepeat.equalsIgnoreCase("Y") || inputRepeat.equalsIgnoreCase("N")) {
-                    break;
+                    return inputRepeat;
                 }
                 else {
                     System.out.println("Please enter either Yes or No. You can also use Y or N. Try again.");
@@ -133,10 +131,8 @@ public class AnnualBonus {
             }
             else {
                 System.out.println("Please enter a valid string input. Try again.");
-                userRepeat.next();
+                userInput.next();
             }
         }
-
-        return inputRepeat;
     }
 }
