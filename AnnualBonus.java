@@ -2,19 +2,24 @@ import java.util.Scanner;
 
 public class AnnualBonus {
     static Scanner userInput = new Scanner (System.in);
-
     public static void main (String[] args) {
         String tryAgain;
 
         do {
             System.out.println("CALCULATOR for Annual Empolyee Bonus");
             System.out.println("This is based on their years of service and annual performance rating");
+            System.out.println();
 
             String employeeName = checkInputName();
             float annualSalary = checkInputSalary();
             int yearService = checkInputYear();
             int performanceRate = checkInputRate();
 
+            float employeeBonus = calculateBonus(annualSalary, yearService, performanceRate);
+            float totalSalary = annualSalary + employeeBonus;
+            System.out.println("===== Calculation =====")
+            System.out.println("Bonus: " + employeeBonus);
+            System.out.println("Total Salary: " + totalSalary);
 
             tryAgain = checkInputTry();
             System.out.println();
@@ -94,7 +99,7 @@ public class AnnualBonus {
         int inputRate;
 
         while (true) {
-            System.out.print("Performance Rating: ");
+            System.out.print("Performance Rating (0-100): ");
 
             if (userInput.hasNextInt()) {
                 inputRate = userInput.nextInt();
@@ -133,6 +138,37 @@ public class AnnualBonus {
                 System.out.println("Please enter a valid string input. Try again.");
                 userInput.next();
             }
+        }
+    }
+    static float calculateBonus(float annualSalary, int yearService, int performanceRate) {
+        float salaryBonus
+        if (yearService >= 5) {
+            if (performaceRate >= 90) {
+                salaryBonus = annualSalary * 0.20;
+                return salaryBonus;
+            }
+            else if (performanceRate >= 80 && performaceRate <= 89) {
+                salaryBonus = annualSalary * 0.15;
+                return salaryBonus;
+            }
+            else if (performaceRate < 80) {
+                salaryBonus = annualSalary * 0.10;
+                return salaryBonus;
+            }
+        }
+        else if (yearService < 5) {
+            if (performaceRate >= 90) {
+                salaryBonus = annualSalary * 0.10;
+                return salaryBonus;
+            }
+            else if (performanceRate >= 80 && performaceRate <= 89) {
+                salaryBonus = annualSalary * 0.5;
+                return salaryBonus;
+            }
+            else if (performaceRate < 80) {
+                return salaryBonus;
+            }
+
         }
     }
 }
