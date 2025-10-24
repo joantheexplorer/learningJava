@@ -14,16 +14,34 @@ public class NumberGame {
             System.out.println("I'm JoAI :) What's your name?");
             String playerName = checkInputName();
             System.out.println("Hello, " + playerName "! Let's play.");
+            int randomNum = = (int)(Math.random() * 101);
             dotAnimation();
             System.out.println("\n Number generated successfully!");
 
-            int retry = 0;
-            int guessedNumber;
+            int wrongGuess = 0;
+            int guessedNum, countGuess;
             
             do {
-                guessedNumber = validNumber();
+                guessedNum = checkInputNumber();
+                int wrongGuess = checkNumberGuess(randomNum, guessedNum);
 
-            } while(retry = 1);
+                if (wrongGuess = 0) {
+                    break;
+                }
+                else if (wrongGuess = 1) {
+                    System.out.println("Too high! Try again.");
+                    countGuess++;
+                } 
+                else if (wrongGuess = 2) {
+                    System.out.println("Too low! Try again.")
+                    countGuess++;
+                }
+            } while(wrongGuess = 1 || wrongGuess = 2);
+
+            System.out.println("Correct! You guessed the number " + randomNum " in " + countGuess + " attempts!");
+            
+
+
         }while (tryAgain.equalsIgnoreCase("Yes") || tryAgain.equalsIgnoreCase("Y") ||
                tryAgain.equals("1"));
 
@@ -67,26 +85,26 @@ public class NumberGame {
         System.out.println("\r" + messageLoad + "Complete!");
     }
 
-    static int checkInputYear()
+    static int checkInputNumber()
     {
-        int inputYear;
+        int inputGuess;
 
         while (true)
         {
-            System.out.print("Years of Service: ");
+            System.out.print("Your Guess: ");
 
             if (userInput.hasNextInt()) // check if input is integer
             {
                 inputYear = userInput.nextInt();
 
-                if (inputYear > 0 && inputYear < 100)
+                if (inputYear > -1 && inputYear < 101)
                 {
                     userInput.nextLine(); // clear buffer
                     return inputYear;
                 }
                 else
                 {
-                    System.out.println("Please enter a valid year of service. Try again.");
+                    System.out.println("Please enter a valid int number within 1-100. Try again.");
                 }
             }
             else
@@ -95,5 +113,18 @@ public class NumberGame {
                 userInput.next(); // clear invalid input
             }
         }
+    }
+
+    static int checkNumberGuess(int randomNum, int guessedNum) {
+        if (randomNum == guessedNum) {
+            return 0;
+        }
+        else if (randomNum < guessedNum) {
+            return 1;
+        }
+        else if (randomNum > guessedNum) {
+            return 2;
+        }
+
     }
 }
