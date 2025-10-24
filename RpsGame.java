@@ -17,7 +17,7 @@ public class RpsGame {
             System.out.println("Player 2: ");
             String player2Name = checkInputName();
 
-            System.out.println("\nHello, " + player1Name + " and " + player2Name + "! Let's play.");
+            System.out.println("\nHello, " + player1Name + " and " + player2Name + "! Let's play.\n");
 
             mainGame(player1Name, player2Name);
 
@@ -60,13 +60,13 @@ public class RpsGame {
         while (true)
         {
             System.out.print(playerMssg + ", enter your move: ");
-            inpuMove = userInput.nextLine().trim().toLowerCase(); // remove any extra space
-            
-            if (inputMove.equalsIgnoreCase("r") || inputMove.equalsIgnoreCase("p") || inputMove.equalsIgnoreCase("s") || inputMove.equalsIgnoreCase("q")) 
+            inputMove = userInput.nextLine().trim().toLowerCase(); // remove any extra space
+
+            if (inputMove.equalsIgnoreCase("r") || inputMove.equalsIgnoreCase("p") || inputMove.equalsIgnoreCase("s") || inputMove.equalsIgnoreCase("q"))
             {
                     return inputMove;
             }
-            else 
+            else
             {
                     System.out.println("Please enter one of the following: r for rock, p for paper, and s for scissors.");
             }
@@ -75,7 +75,7 @@ public class RpsGame {
 
     static String compareP1P2(String p1, String p2)
     {
-        
+
         if (p1.equals(p2))
         {
             return "It's a TIE!";
@@ -94,7 +94,7 @@ public class RpsGame {
         {
             return "Player 1 WINS! Scissors cuts Paper.";
         }
-        else if (p1.equals("p") && p2.equalse("s"))
+        else if (p1.equals("p") && p2.equals("s"))
         {
             return "Player 2 WINS! Scissors cuts Paper.";
         }
@@ -103,13 +103,13 @@ public class RpsGame {
         {
             return "Player 1 WINS! Paper covers Rock.";
         }
-        else 
+        else
         {
             return "Player 2 WINS! Paper covers Rock.";
         }
     }
 
-    static void mainGame(String player1Name, String playerName)
+    static void mainGame(String player1Name, String player2Name)
     {
         //variables for scorekeeping
         int p1Score = 0;
@@ -122,7 +122,7 @@ public class RpsGame {
             if (p1.equals("q"))
             {
                 System.out.println("\nPlayer 1 quit the game.");
-                break; 
+                break;
             }
             String p2 = checkInputMove(player2Name);
             if (p2.equals("q"))
@@ -140,16 +140,16 @@ public class RpsGame {
             {
                 p2Score++;
             }
-            else 
+            else
             {
                 tieScore++;
             }
 
-            System.out.println("Score: P1: " + p1Score + " | P2: " + p2Score + " | Ties: " + tieScore);
+            System.out.println("Score: " + player1Name + ": " + p1Score + " | " + player2Name + ": " + p2Score + " | Ties: " + tieScore +"\n");
         }
 
-        System.out.println("--- Match Ended ---");
-        System.out.println("Final Score: Player 1: " + p1Score + " wins | Player 2: " + p2Score + " wins | Ties" + tieScore + " ties.");
+        System.out.println("\n--- Match Ended ---");
+        System.out.println("Final Score: Player 1: " + p1Score + " wins | Player 2: " + p2Score + " wins | Ties: " + tieScore + " ties.");
         if (p1Score > p2Score)
         {
             System.out.println("Player 1 is the overall winner!");
@@ -158,9 +158,9 @@ public class RpsGame {
         {
             System.out.println("Player 2 is the overall winner!");
         }
-        else 
+        else
         {
-            System.out.println("Tie! Both odf you are winners :)");
+            System.out.println("No winners today.");
         }
         System.out.println("Thanks for playing!");
     }
@@ -170,7 +170,7 @@ public class RpsGame {
 
         while (true)
         {
-            System.out.print("Do you want to play another around? (Yes or No): ");
+            System.out.print("\nDo you want to play another around? (Yes or No): ");
 
             if (userInput.hasNextLine())
             {
