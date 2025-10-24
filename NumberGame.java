@@ -17,6 +17,14 @@ public class NumberGame {
     static void dotAnimation()
     {
         String messageLoad = "Generating a number";
+        String dotsDots = { ".", "..", "..."};
         
+        for(int i = 0; i < 10; i++) {
+            for (String dot : dots) {
+                Systerm.out.print("\r" + messageLoad + dotsDots + "   ");
+                Thread.sleep(300);
+            }
+        }
+        System.out.println("\r" + messageLoad + "Complete!");
     }
 }
