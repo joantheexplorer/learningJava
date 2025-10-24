@@ -11,11 +11,24 @@ public class RpsGame {
             System.out.println("Welcome to the Two-Player Rock-Paper-Scissors Duel!");
             System.out.println("(Enter r=Rock, p=Paper, s=Scissors, q=Quit)");
             System.out.println("---------------------------------------------");
+
             //ask for player's name
-            System.out.println("Player 1: ");
-            String player1Name = checkInputName();
-            System.out.println("Player 2: ");
-            String player2Name = checkInputName();
+            String player1Name, player2Name;
+            while(true)
+            {
+                System.out.println("Player 1: ");
+                player1Name = checkInputName();
+                System.out.println("Player 2: ");
+                player2Name = checkInputName();
+                if (!((player1Name.toLowerCase()).equals((player2Name).toLowerCase())))
+                {
+                    break;
+                }
+                else
+                {
+                    System.out.println("Both names cannot be the same. Try again.\n");
+                }
+            }
 
             System.out.println("\nHello, " + player1Name + " and " + player2Name + "! Let's play.\n");
 
@@ -121,23 +134,23 @@ public class RpsGame {
             String p1 = checkInputMove(player1Name);
             if (p1.equals("q"))
             {
-                System.out.println("\nPlayer 1 quit the game.");
+                System.out.println("\n" + player1Name + " quit the game.");
                 break;
             }
             String p2 = checkInputMove(player2Name);
             if (p2.equals("q"))
             {
-                System.out.println("\nPlayer 2 quit the game.");
+                System.out.println("\n" + player2Name + " quit the game.");
                 break;
             }
 
             String resultGame = compareP1P2(p1, p2, player1Name, player2Name);
             System.out.println("Result: " + resultGame);
 
-            if (resultGame.contains("Player 1 WINS!")) {
+            if (resultGame.contains(player1Name)) {
                 p1Score++;
             }
-            else if(resultGame.contains("Player 2 WINS!"))
+            else if(resultGame.contains(player2Name))
             {
                 p2Score++;
             }
@@ -150,7 +163,7 @@ public class RpsGame {
         }
 
         System.out.println("\n--- Match Ended ---");
-        System.out.println("Final Score: Player 1: " + p1Score + " wins | Player 2: " + p2Score + " wins | Ties: " + tieScore + " ties.");
+        System.out.println("Final Score: " + player1Name + ": " + p1Score + " wins | " + player2Name+ ": " + p2Score + " wins | Ties: " + tieScore + " ties.");
         if (p1Score > p2Score)
         {
             System.out.println(player1Name + " is the overall winner!");
@@ -163,6 +176,7 @@ public class RpsGame {
         {
             System.out.println("No winners today.");
         }
+        System.out.println("---------------------------------------------");
         System.out.println("Thanks for playing!");
     }
     static String checkInputTry()
