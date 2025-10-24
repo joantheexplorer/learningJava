@@ -3,43 +3,24 @@ import java.util.Scanner;
 public class NumberGame {
     static Scanner userInput = new Scanner(System.in);
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws InterruptedException
     {
         String tryAgain;
 
-        do 
+        do
         {
             System.out.println("Welcome to the Number Guessing Game!");
-            
+
             System.out.println("I'm JoAI :) What's your name?");
             String playerName = checkInputName();
-            System.out.println("Hello, " + playerName "! Let's play.");
-            int randomNum = = (int)(Math.random() * 101);
+            System.out.println("Hello, " + playerName + "! Let's play.");
+
+            int randomNum = (int)(Math.random() * 101);
             dotAnimation();
-            System.out.println("\n Number generated successfully!");
+            System.out.println("\nNumber generated successfully!");
 
-            int wrongGuess = 0;
-            int guessedNum, countGuess;
-            
-            do {
-                guessedNum = checkInputNumber();
-                int wrongGuess = checkNumberGuess(randomNum, guessedNum);
+            mainGame(playerName, randomNum);
 
-                if (wrongGuess = 0) {
-                    break;
-                }
-                else if (wrongGuess = 1) {
-                    System.out.println("Too high! Try again.");
-                    countGuess++;
-                } 
-                else if (wrongGuess = 2) {
-                    System.out.println("Too low! Try again.")
-                    countGuess++;
-                }
-            } while(wrongGuess = 1 || wrongGuess = 2);
-
-            System.out.println("Correct! You guessed the number " + randomNum " in " + countGuess + " attempts!");
-            
             // asks the user if they want to repeat the process
             tryAgain = checkInputTry();
             System.out.println();
@@ -49,10 +30,10 @@ public class NumberGame {
                tryAgain.equals("1"));
 
         // exit message
-        System.out.println("Thank you for using this Java program.");
+        System.out.println("Thank you for playing this Java program.");
         userInput.close();
     }
-    
+
     static String checkInputName()
     {
         String inputName;
@@ -82,10 +63,10 @@ public class NumberGame {
             Thread.sleep(500);
             System.out.print("\r" + messageLoad + "..");
             Thread.sleep(500);
-            System.out.print("\r" + messaheLoad + "...");
+            System.out.print("\r" + messageLoad + "...");
             Thread.sleep(500);
         }
-        System.out.println("\r" + messageLoad + "Complete!");
+        System.out.println("\r" + messageLoad + " Complete!");
     }
 
     static int checkInputNumber()
@@ -98,12 +79,12 @@ public class NumberGame {
 
             if (userInput.hasNextInt()) // check if input is integer
             {
-                inputYear = userInput.nextInt();
+                inputGuess = userInput.nextInt();
 
-                if (inputYear > -1 && inputYear < 101)
+                if (inputGuess > -1 && inputGuess < 101)
                 {
                     userInput.nextLine(); // clear buffer
-                    return inputYear;
+                    return inputGuess;
                 }
                 else
                 {
@@ -125,7 +106,7 @@ public class NumberGame {
         else if (randomNum < guessedNum) {
             return 1;
         }
-        else if (randomNum > guessedNum) {
+        else {
             return 2;
         }
     }
@@ -161,5 +142,29 @@ public class NumberGame {
                 userInput.next(); // clear invalid input
             }
         }
+    }
+
+    static void mainGame(String playerName, int randomNum)
+    {
+        int guessedNum, countGuess = 1, wrongGuess = 0;
+        do {
+            guessedNum = checkInputNumber();
+            wrongGuess = checkNumberGuess(randomNum, guessedNum);
+
+            if (wrongGuess == 0) {
+                break;
+            }
+            else if (wrongGuess == 1) {
+                System.out.println("Too high! Try again.");
+                countGuess++;
+            }
+            else if (wrongGuess == 2) {
+                System.out.println("Too low! Try again.");
+                countGuess++;
+            }
+        } while(wrongGuess == 1 || wrongGuess == 2);
+
+        System.out.println("Correct! You guessed the number " + randomNum + " in " + countGuess + " attempts!");
+        System.out.println("JoAI is proud of you, " + playerName);
     }
 }
