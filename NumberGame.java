@@ -21,7 +21,9 @@ public class NumberGame {
 
             //simple animation while generating a number
             dotAnimation();
-            System.out.println("Number generated successfully! Press enter to play.");
+            System.out.print("Number generated successfully! Press enter to play.");
+            // clear buffer before each guess to avoid leftover newline issues (just in case the user enters something.)
+            userInput.nextLine();
 
             //main game logic
             mainGame(playerName, randomNum);
@@ -80,9 +82,6 @@ public class NumberGame {
     static int checkInputNumber()
     {
         int inputGuess;
-
-        // clear buffer before each guess to avoid leftover newline issues
-        userInput.nextLine();
 
         while (true)
         {
