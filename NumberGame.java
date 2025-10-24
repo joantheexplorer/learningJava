@@ -40,6 +40,9 @@ public class NumberGame {
 
             System.out.println("Correct! You guessed the number " + randomNum " in " + countGuess + " attempts!");
             
+            // asks the user if they want to repeat the process
+            tryAgain = checkInputTry();
+            System.out.println();
 
 
         }while (tryAgain.equalsIgnoreCase("Yes") || tryAgain.equalsIgnoreCase("Y") ||
@@ -125,6 +128,38 @@ public class NumberGame {
         else if (randomNum > guessedNum) {
             return 2;
         }
+    }
 
+    static String checkInputTry()
+    {
+        String inputRepeat;
+
+        while (true)
+        {
+            System.out.print("Do you want to try another round? (Yes or No): ");
+
+            if (userInput.hasNextLine())
+            {
+                inputRepeat = userInput.nextLine().trim(); // removes extra spaces
+
+                // accepts Yes, 1, Y for Yes and No, 0, N for No
+                if (inputRepeat.equalsIgnoreCase("Yes") || inputRepeat.equalsIgnoreCase("No") ||
+                    inputRepeat.equalsIgnoreCase("Y") || inputRepeat.equalsIgnoreCase("N") ||
+                    inputRepeat.equals("1") || inputRepeat.equals("0"))
+                {
+                    return inputRepeat;
+                }
+                else
+                {
+                    System.out.println(
+                        "Please enter either Yes or No. You can also use Y or N. Try again.");
+                }
+            }
+            else
+            {
+                System.out.println("Please enter a valid string input. Try again.");
+                userInput.next(); // clear invalid input
+            }
+        }
     }
 }
