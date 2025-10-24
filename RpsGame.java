@@ -5,13 +5,17 @@ public class RpsGame {
 
     public static void main(String[] args) throws InterruptedException
     {
+        System.out.println("Welcome to the Two-Player Rock-Paper-Scissors Duel!");
+        System.out.println("(Enter r=Rock, p=Paper, s=Scissors, q=Quit)");
+        System.out.println("---------------------------------------------");
         String tryAgain;
-
+        
         do
         {
-            System.out.println("Welcome to the Two-Player Rock-Paper-Scissors Duel!");
-            System.out.println("(Enter r=Rock, p=Paper, s=Scissors, q=Quit)");
-            System.out.println("---------------------------------------------");
+            //variables for scorekeeping
+            int p1Score = 0;
+            int p2Score = 0;
+            int tieScore = 0;
 
             //ask for player's name
             System.out.println("Player 1: ");
@@ -21,22 +25,17 @@ public class RpsGame {
 
             System.out.println("\nHello, " + player1Name + " and " + player2Name + "! Let's play.");
 
-            //generating a random number from 1-100
-            String player1Ans = checkInputName(player1Name);
-            String player2Ans = checkInputName(player2Name);
+            mainGame(player1Name, player2Name);
 
-            mainGame(String player1Ans, String player2Ans);
-            
             // asks the user if they want to play again
             tryAgain = checkInputTry();
             System.out.println();
-
 
         }while (tryAgain.equalsIgnoreCase("Yes") || tryAgain.equalsIgnoreCase("Y") ||
                tryAgain.equals("1"));
 
         // exit message
-        System.out.println("Thank you for playing with JoAI.");
+        System.out.println("Thank you for playing!");
         userInput.close();
     }
 
@@ -60,27 +59,87 @@ public class RpsGame {
         }
     }
 
-    static String checkInputCustmr(String playerMssg)
+    static String checkInputMove(String playerMssg)
     {
-        String inputType;
+        String inputMove;
 
         while (true)
         {
             System.out.print(playerMssg + ", enter your move: ");
-
-            if (userInput.hasNextLine())
+            inpuMove = userInput.nextLine().trim().toLowerCase(); // remove any extra space
+            
+            if (inputMove.equalsIgnoreCase("r") || inputMove.equalsIgnoreCase("p") || inputMove.equalsIgnoreCase("s") || inputMove.equalsIgnoreCase("q")) 
             {
-                inputType = userInput.nextLine().trim(); // remove any extra space
-                return inputType;
+                    return inputMove;
+            }
+            else 
+            {
+                    System.out.println("Please enter one of the following: r for rock, p for paper, and s for scissors.");
+            }
+                
             }
             else
             {
-                System.out.println("Please enter one of the following: regular, premium, vip, or other.");
+                System.out.println("Please enter one of the following: r for rock, p for paper, and s for scissors.");
             }
         }
     }
 
+    static String compareP1P2(String p1, String p2)
+    {
+        
+        if (p1.equals(p2))
+        {
+            return "It's a TIE!";
+        }
+        //rock vs scissors
+        else if (p1.equalsIgnoreCase("r") && p2.equalsIgnoreCase("s"))
+        {
+            return "Player 1 WINS! Rock crushes Scissors.";
+        }
+        else if (p1.equalsIgnoreCase("s") && p2.equalsIgnoreCase("r"))
+        {
+            return "Player 2 WINS! Rock crushes Scissors.";
+        }
+        //scissors vs paper
+        else if (p1.equalsIgnoreCase("s") && p2.equalsIgnoreCase("p"))
+        {
+            return "Player 1 WINS! Scissors cuts Paper.";
+        }
+        else if (p1.equalsIgnoreCase("p") && p2.equalsIgnoreCase("s"))
+        {
+            return "Player 2 WINS! Scissors cuts Paper.";
+        }
+        //paper vs rock
+        else if (p1.equalsIgnoreCase("p") && p2.equalsIgnoreCase("r"))
+        {
+            return "Player 1 WINS! Paper covers Rock.";
+        }
+        else 
+        {
+            return "Player 2 WINS! Paper covers Rock.";
+        }
+    }
 
+    static void mainGame(String player1Name, String playerName)
+    {
+        while(true)
+            {
+                String p1 = checkInputMove(player1Name);
+                if (p1.equalsIgnoreCase("q"))
+                {
+                    break; 
+                }
+                String p2 = checkInputMove(player2Name);
+                if (p2.equalsIgnoreCase("q"))
+                {
+                    break;
+                }
+
+                String resultGame = compareP1P2(p1, p2);
+
+            }
+    }
     static String checkInputTry()
     {
         String inputRepeat;
