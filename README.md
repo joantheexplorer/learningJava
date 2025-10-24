@@ -6,3 +6,4 @@
 3. Annual Bonus with rating (0-100)
 4. Annual Bonus with rating that uses string
 5. Discount based on Customer Type
+6. Number guessing game 
