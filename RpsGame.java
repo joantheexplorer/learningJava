@@ -73,7 +73,7 @@ public class RpsGame {
         }
     }
 
-    static String compareP1P2(String p1, String p2)
+    static String compareP1P2(String p1, String p2, String player1Name, String player2Name)
     {
 
         if (p1.equals(p2))
@@ -83,29 +83,29 @@ public class RpsGame {
         //rock vs scissors
         else if (p1.equals("r") && p2.equals("s"))
         {
-            return "Player 1 WINS! Rock crushes Scissors.";
+            return player1Name + " WINS! Rock crushes Scissors.";
         }
         else if (p1.equals("s") && p2.equals("r"))
         {
-            return "Player 2 WINS! Rock crushes Scissors.";
+            return player2Name + " WINS! Rock crushes Scissors.";
         }
         //scissors vs paper
         else if (p1.equals("s") && p2.equals("p"))
         {
-            return "Player 1 WINS! Scissors cuts Paper.";
+            return player1Name + " WINS! Scissors cuts Paper.";
         }
         else if (p1.equals("p") && p2.equals("s"))
         {
-            return "Player 2 WINS! Scissors cuts Paper.";
+            return player2Name + " WINS! Scissors cuts Paper.";
         }
         //paper vs rock
         else if (p1.equals("p") && p2.equals("r"))
         {
-            return "Player 1 WINS! Paper covers Rock.";
+            return player1Name + " WINS! Paper covers Rock.";
         }
         else
         {
-            return "Player 2 WINS! Paper covers Rock.";
+            return player2Name + " WINS! Paper covers Rock.";
         }
     }
 
@@ -131,7 +131,8 @@ public class RpsGame {
                 break;
             }
 
-            String resultGame = compareP1P2(p1, p2);
+            String resultGame = compareP1P2(p1, p2, player1Name, player2Name);
+            System.out.println("Result: " + resultGame);
 
             if (resultGame.contains("Player 1 WINS!")) {
                 p1Score++;
@@ -152,11 +153,11 @@ public class RpsGame {
         System.out.println("Final Score: Player 1: " + p1Score + " wins | Player 2: " + p2Score + " wins | Ties: " + tieScore + " ties.");
         if (p1Score > p2Score)
         {
-            System.out.println("Player 1 is the overall winner!");
+            System.out.println(player1Name + " is the overall winner!");
         }
         else if (p1Score < p2Score)
         {
-            System.out.println("Player 2 is the overall winner!");
+            System.out.println(player2Name + " is the overall winner!");
         }
         else
         {
@@ -170,7 +171,7 @@ public class RpsGame {
 
         while (true)
         {
-            System.out.print("\nDo you want to play another around? (Yes or No): ");
+            System.out.print("\nDo you want to play another round? (Yes or No): ");
 
             if (userInput.hasNextLine())
             {
