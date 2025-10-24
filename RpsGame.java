@@ -5,18 +5,12 @@ public class RpsGame {
 
     public static void main(String[] args) throws InterruptedException
     {
-        System.out.println("Welcome to the Two-Player Rock-Paper-Scissors Duel!");
-        System.out.println("(Enter r=Rock, p=Paper, s=Scissors, q=Quit)");
-        System.out.println("---------------------------------------------");
         String tryAgain;
-        
         do
         {
-            //variables for scorekeeping
-            int p1Score = 0;
-            int p2Score = 0;
-            int tieScore = 0;
-
+            System.out.println("Welcome to the Two-Player Rock-Paper-Scissors Duel!");
+            System.out.println("(Enter r=Rock, p=Paper, s=Scissors, q=Quit)");
+            System.out.println("---------------------------------------------");
             //ask for player's name
             System.out.println("Player 1: ");
             String player1Name = checkInputName();
@@ -76,12 +70,6 @@ public class RpsGame {
             {
                     System.out.println("Please enter one of the following: r for rock, p for paper, and s for scissors.");
             }
-                
-            }
-            else
-            {
-                System.out.println("Please enter one of the following: r for rock, p for paper, and s for scissors.");
-            }
         }
     }
 
@@ -93,25 +81,25 @@ public class RpsGame {
             return "It's a TIE!";
         }
         //rock vs scissors
-        else if (p1.equalsIgnoreCase("r") && p2.equalsIgnoreCase("s"))
+        else if (p1.equals("r") && p2.equals("s"))
         {
             return "Player 1 WINS! Rock crushes Scissors.";
         }
-        else if (p1.equalsIgnoreCase("s") && p2.equalsIgnoreCase("r"))
+        else if (p1.equals("s") && p2.equals("r"))
         {
             return "Player 2 WINS! Rock crushes Scissors.";
         }
         //scissors vs paper
-        else if (p1.equalsIgnoreCase("s") && p2.equalsIgnoreCase("p"))
+        else if (p1.equals("s") && p2.equals("p"))
         {
             return "Player 1 WINS! Scissors cuts Paper.";
         }
-        else if (p1.equalsIgnoreCase("p") && p2.equalsIgnoreCase("s"))
+        else if (p1.equals("p") && p2.equalse("s"))
         {
             return "Player 2 WINS! Scissors cuts Paper.";
         }
         //paper vs rock
-        else if (p1.equalsIgnoreCase("p") && p2.equalsIgnoreCase("r"))
+        else if (p1.equals("p") && p2.equals("r"))
         {
             return "Player 1 WINS! Paper covers Rock.";
         }
@@ -123,22 +111,58 @@ public class RpsGame {
 
     static void mainGame(String player1Name, String playerName)
     {
+        //variables for scorekeeping
+        int p1Score = 0;
+        int p2Score = 0;
+        int tieScore = 0;
+
         while(true)
+        {
+            String p1 = checkInputMove(player1Name);
+            if (p1.equals("q"))
             {
-                String p1 = checkInputMove(player1Name);
-                if (p1.equalsIgnoreCase("q"))
-                {
-                    break; 
-                }
-                String p2 = checkInputMove(player2Name);
-                if (p2.equalsIgnoreCase("q"))
-                {
-                    break;
-                }
-
-                String resultGame = compareP1P2(p1, p2);
-
+                System.out.println("\nPlayer 1 quit the game.");
+                break; 
             }
+            String p2 = checkInputMove(player2Name);
+            if (p2.equals("q"))
+            {
+                System.out.println("\nPlayer 2 quit the game.");
+                break;
+            }
+
+            String resultGame = compareP1P2(p1, p2);
+
+            if (resultGame.contains("Player 1 WINS!")) {
+                p1Score++;
+            }
+            else if(resultGame.contains("Player 2 WINS!"))
+            {
+                p2Score++;
+            }
+            else 
+            {
+                tieScore++;
+            }
+
+            System.out.println("Score: P1: " + p1Score + " | P2: " + p2Score + " | Ties: " + tieScore);
+        }
+
+        System.out.println("--- Match Ended ---");
+        System.out.println("Final Score: Player 1: " + p1Score + " wins | Player 2: " + p2Score + " wins | Ties" + tieScore + " ties.");
+        if (p1Score > p2Score)
+        {
+            System.out.println("Player 1 is the overall winner!");
+        }
+        else if (p1Score < p2Score)
+        {
+            System.out.println("Player 2 is the overall winner!");
+        }
+        else 
+        {
+            System.out.println("Tie! Both odf you are winners :)");
+        }
+        System.out.println("Thanks for playing!");
     }
     static String checkInputTry()
     {
@@ -146,7 +170,7 @@ public class RpsGame {
 
         while (true)
         {
-            System.out.print("Do you want to try again? (Yes or No): ");
+            System.out.print("Do you want to play another around? (Yes or No): ");
 
             if (userInput.hasNextLine())
             {
@@ -173,4 +197,3 @@ public class RpsGame {
         }
     }
 }
-
