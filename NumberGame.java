@@ -13,11 +13,12 @@ public class NumberGame {
 
             System.out.println("I'm JoAI :) What's your name?");
             String playerName = checkInputName();
-            System.out.println("Hello, " + playerName + "! Let's play.");
+            System.out.println("\nHello, " + playerName + "! Let's play.");
 
-            int randomNum = (int)(Math.random() * 101);
+            int randomNum = (int)(Math.random() * 100) + 1;
             dotAnimation();
-            System.out.println("\nNumber generated successfully!");
+            System.out.println("Number generated successfully! Press enter to play.");
+
 
             mainGame(playerName, randomNum);
 
@@ -30,7 +31,7 @@ public class NumberGame {
                tryAgain.equals("1"));
 
         // exit message
-        System.out.println("Thank you for playing this Java program.");
+        System.out.println("Thank you for playing with JoAI.");
         userInput.close();
     }
 
@@ -56,7 +57,7 @@ public class NumberGame {
 
     static void dotAnimation() throws InterruptedException
     {
-        String messageLoad = "Generating a number";
+        String messageLoad = "JoAI is generating a number (Please don't type anything).";
 
         for(int i = 0; i < 3; i++) {
             System.out.print("\r" + messageLoad + ".");
@@ -73,15 +74,18 @@ public class NumberGame {
     {
         int inputGuess;
 
+        // clear buffer before each guess to avoid leftover newline issues
+        userInput.nextLine();
+
         while (true)
         {
-            System.out.print("Your Guess: ");
+            System.out.print("\nYour Guess (Type -1 if you want to end your guessing): ");
 
             if (userInput.hasNextInt()) // check if input is integer
             {
                 inputGuess = userInput.nextInt();
 
-                if (inputGuess > -1 && inputGuess < 101)
+                if (inputGuess > -2 && inputGuess < 101)
                 {
                     userInput.nextLine(); // clear buffer
                     return inputGuess;
@@ -117,7 +121,7 @@ public class NumberGame {
 
         while (true)
         {
-            System.out.print("Do you want to try another round? (Yes or No): ");
+            System.out.print("\nDo you want to try another round? (Yes or No): ");
 
             if (userInput.hasNextLine())
             {
@@ -149,6 +153,11 @@ public class NumberGame {
         int guessedNum, countGuess = 1, wrongGuess = 0;
         do {
             guessedNum = checkInputNumber();
+
+            if (guessedNum == -1) {
+                System.out.println("The number is " + randomNum + "! Try again next time, " + playerName + " :)");
+                return;
+            }
             wrongGuess = checkNumberGuess(randomNum, guessedNum);
 
             if (wrongGuess == 0) {
@@ -165,6 +174,6 @@ public class NumberGame {
         } while(wrongGuess == 1 || wrongGuess == 2);
 
         System.out.println("Correct! You guessed the number " + randomNum + " in " + countGuess + " attempts!");
-        System.out.println("JoAI is proud of you, " + playerName);
+        System.out.println("JoAI is proud of you, " + playerName + "!");
     }
 }
