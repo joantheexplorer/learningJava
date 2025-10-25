@@ -6,4 +6,7 @@
 3. Annual Bonus with rating (0-100)
 4. Annual Bonus with rating that uses string
 5. Discount based on Customer Type
-6. Number guessing game 
+6. Random Number Guessing Game with counter 
+7. Rock-Paper-Scissors Game (2 players) with Score Tally
+
+## Signed by joan (second year)
