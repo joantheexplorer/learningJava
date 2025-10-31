@@ -1,6 +1,4 @@
 # learningJava
-## This repository showcases the activities and case studies I created during my second year as a Computer Science student. Developed in Java, these projects demonstrate my advancement in object-oriented programming, algorithm design, and computational thinking.
- 
 
 1. University Pizzeria Order System
 2. Service Quote Generator
