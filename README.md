@@ -8,4 +8,4 @@
 6. Random Number Guessing Game with counter 
 7. Rock-Paper-Scissors Game (2 players) with Score Tally
 
-### Signed by joan (second year)
+### signed by joantheexplorer (second year)
