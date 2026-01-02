@@ -7,5 +7,6 @@
 5. Discount based on Customer Type
 6. Random Number Guessing Game with counter 
 7. Rock-Paper-Scissors Game (2 players) with Score Tally
+8. Java Swing
 
 ### signed by joantheexplorer (second year)
